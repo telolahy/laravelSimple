@@ -71,7 +71,9 @@ class ArticlesController extends Controller
      */
     public function edit($id)
     {
-        //
+        // dd($id);
+        $article=Articles::findOrFail($id);
+        return view('articles.edit',compact('article'));
     }
 
     /**
@@ -83,7 +85,17 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd('coucou');
+        $article=Articles::findOrFail($id);
+        $filename=time().'.'.$request->image->extension();
+        $path=$request->file('image')->storeAs('image',$filename,'public');
+            $article->name=$request->name;
+            $article->description=$request->description;
+            $article->image=$path;
+            $article->type=$request->type;
+            $article->prix=$request->prix;
+            $article->save();
+            return redirect()->route('article.create')->with('status1', "l'article ".$request->name." modifier");
     }
 
     /**
@@ -94,6 +106,12 @@ class ArticlesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // dd($id);
+        $article=Articles::findOrFail($id);
+        $article->delete();
+        $articlesHomme=Articles::where('type','homme')->get();
+        $articlesFemme=Articles::where('type','femme')->get();
+        $articlesAccess=Articles::where('type','accessoires')->get();
+        return view('articles/index',compact('articlesHomme','articlesFemme','articlesAccess'));
     }
 }
