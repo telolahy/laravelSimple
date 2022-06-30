@@ -49,7 +49,7 @@
 					<div class="product-item women">
 						<div class="product product_filter">
 							<div class="product_image">
-								<img src="images/product_2.png" alt="">
+								<img src="{{Storage::url($article->image)}}" alt="">
 							</div>
 							<div class="favorite"></div>
 							<div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
@@ -69,7 +69,7 @@
 					<div class="product-item accessories">
 						<div class="product product_filter">
 							<div class="product_image">
-								<img src="images/product_4.png" alt="">
+								<img src="{{Storage::url($article->image)}}" alt="">
 							</div>
 							<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
 							<div class="favorite favorite_left"></div>
