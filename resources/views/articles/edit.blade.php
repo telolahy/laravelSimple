@@ -1,24 +1,20 @@
 @extends('layout')
 @section('contenu')
-@if (session('status'))
+{{-- @if (session('status'))
     <div class="alert alert-success mb-12">
         {{ session('status') }}
     </div>
-@endif
-@if (session('status1'))
-    <div class="alert alert-success mb-12">
-        {{ session('status') }}
-    </div>
-@endif
-<form method="POST" action="{{route('article.store')}}" enctype="multipart/form-data">
+@endif --}}
+<form method="POST" action="{{route('article.update',$article->id)}}" enctype="multipart/form-data">
     @csrf
+    @method('PUT')
     <div class="form-group">
         <label for="name">Nom de l'article</label>
-        <input type="text" class="form-control" name="name" >
+        <input type="text" class="form-control" name="name" value={{$article->name}} >
     </div>
     <div class="form-group">
         <label for="description">Description</label>
-        <input type="text" class="form-control" name="description" >
+        <input type="text" class="form-control" name="description" value={{$article->description}} >
     </div>
     <div class="form-group">
         <label for="image">Lien image</label>
@@ -34,8 +30,8 @@
       </div>
     <div class="form-group">
         <label for="prix">Prix</label>
-        <input type="text" class="form-control" name="prix" >
+        <input type="text" class="form-control" name="prix" value={{$article->prix}} >
     </div>
-    <button type="submit" class="btn btn-primary">Ajouter</button>
+    <button type="submit" class="btn btn-primary">Modifier</button>
 </form>
 @endsection
